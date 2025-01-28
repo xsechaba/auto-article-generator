@@ -1,5 +1,4 @@
-import fs from 'fs/promises';
-import path from 'path';
+import { STATIC_ARTICLES } from '../articles';
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -9,9 +8,11 @@ export default async function handler(req, res) {
   const { id } = req.query;
 
   try {
-    const articlePath = path.join(process.cwd(), 'data/articles', `${id}.json`);
-    const content = await fs.readFile(articlePath, 'utf8');
-    const article = JSON.parse(content);
+    const article = STATIC_ARTICLES.find(article => article.id === id);
+    
+    if (!article) {
+      return res.status(404).json({ message: 'Article not found' });
+    }
 
     res.status(200).json(article);
   } catch (error) {

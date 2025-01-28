@@ -115,7 +115,7 @@ export default function Home({ articles: initialArticles }) {
       </main>
 
       <footer className={styles.footer}>
-        <p>Powered by Google Trends and OpenAI</p>
+        <p>NewsFlow - Your Source for Trending News</p>
       </footer>
     </div>
   );
