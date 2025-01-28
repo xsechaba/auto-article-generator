@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 import SearchBar from '../components/SearchBar';
 import Categories from '../components/Categories';
 import fs from 'fs/promises';
 import path from 'path';
+import { STATIC_ARTICLES } from './api/articles';
 
 // Helper function to format dates consistently
 function formatDate(dateString) {
@@ -16,7 +18,7 @@ function formatDate(dateString) {
   });
 }
 
-export default function Home({ articles: initialArticles }) {
+export default function Home({ articles: initialArticles, totalArticles }) {
   const [isClient, setIsClient] = useState(false);
   const [articles, setArticles] = useState(initialArticles);
   const [searchResults, setSearchResults] = useState(null);
@@ -123,40 +125,19 @@ export default function Home({ articles: initialArticles }) {
 
 export async function getStaticProps() {
   try {
-    const articlesDirectory = path.join(process.cwd(), 'data/articles');
-    
-    // Create the directory if it doesn't exist
-    try {
-      await fs.access(articlesDirectory);
-    } catch {
-      await fs.mkdir(articlesDirectory, { recursive: true });
-    }
-    
-    // Read all article files
-    const files = await fs.readdir(articlesDirectory);
-    const articles = await Promise.all(
-      files
-        .filter(file => file.endsWith('.json'))
-        .map(async (file) => {
-          const content = await fs.readFile(path.join(articlesDirectory, file), 'utf8');
-          return JSON.parse(content);
-        })
-    );
-
-    // Sort by timestamp, newest first
-    articles.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-
     return {
       props: {
-        articles
+        initialArticles: STATIC_ARTICLES,
+        totalArticles: STATIC_ARTICLES.length
       },
       revalidate: 60
     };
   } catch (error) {
-    console.error('Error fetching articles:', error);
+    console.error('Error in getStaticProps:', error);
     return {
       props: {
-        articles: []
+        initialArticles: [],
+        totalArticles: 0
       },
       revalidate: 60
     };
