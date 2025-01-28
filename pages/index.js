@@ -1,11 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../styles/Home.module.css';
-import SearchBar from '../components/SearchBar';
-import Categories from '../components/Categories';
-import fs from 'fs/promises';
-import path from 'path';
 import { STATIC_ARTICLES } from './api/articles';
 
 // Helper function to format dates consistently
@@ -18,42 +14,14 @@ function formatDate(dateString) {
   });
 }
 
-export default function Home({ articles: initialArticles, totalArticles }) {
-  const [isClient, setIsClient] = useState(false);
-  const [articles, setArticles] = useState(initialArticles);
-  const [searchResults, setSearchResults] = useState(null);
+export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState('All');
 
-  // Set isClient to true once component mounts
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  const handleSearch = (data) => {
-    if (data.query) {
-      setSearchResults(data);
-      setSelectedCategory('All'); // Reset category when searching
-    } else {
-      setSearchResults(null);
-    }
-  };
-
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
-    setSearchResults(null); // Clear search when changing category
-  };
-
-  // Filter articles based on search and category
-  const filteredArticles = (searchResults ? searchResults.results : articles).filter(article => {
+  // Filter articles based on category
+  const filteredArticles = STATIC_ARTICLES.filter(article => {
     if (selectedCategory === 'All') return true;
     return article.categories && article.categories.includes(selectedCategory);
   });
-
-  const noResultsMessage = searchResults && searchResults.count === 0 
-    ? `No articles found for "${searchResults.query}"`
-    : selectedCategory !== 'All' && filteredArticles.length === 0
-    ? `No articles in the ${selectedCategory} category`
-    : "No articles yet. Check back soon!";
 
   return (
     <div className={styles.container}>
@@ -68,51 +36,49 @@ export default function Home({ articles: initialArticles, totalArticles }) {
           Trending News
         </h1>
 
-        {isClient && (
-          <>
-            <SearchBar onSearch={handleSearch} />
-            <Categories 
-              selectedCategory={selectedCategory} 
-              onCategoryChange={handleCategoryChange}
-            />
-
-            {searchResults && (
-              <p className={styles.searchInfo}>
-                Found {searchResults.count} article{searchResults.count !== 1 ? 's' : ''} for "{searchResults.query}"
-              </p>
-            )}
-          </>
-        )}
+        <div className={styles.categories}>
+          <button 
+            className={`${styles.category} ${selectedCategory === 'All' ? styles.active : ''}`}
+            onClick={() => setSelectedCategory('All')}
+          >
+            All
+          </button>
+          {['Technology', 'Business', 'Environment', 'Health', 'Education'].map(category => (
+            <button
+              key={category}
+              className={`${styles.category} ${selectedCategory === category ? styles.active : ''}`}
+              onClick={() => setSelectedCategory(category)}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
 
         <div className={styles.grid}>
-          {!isClient ? (
-            <p className={styles.loading}>Loading...</p>
-          ) : filteredArticles.length > 0 ? (
-            filteredArticles.map((article) => (
-              <article key={article.id} className={styles.card}>
-                <h2>{article.title}</h2>
-                <p>{article.excerpt}</p>
-                <div className={styles.metadata}>
-                  <span>🔍 {article.searchVolume}</span>
-                  <span>📅 {formatDate(article.timestamp)}</span>
-                </div>
-                <div className={styles.categories}>
-                  {article.categories?.map(category => (
-                    <span 
-                      key={category} 
-                      className={styles.category}
-                      onClick={() => handleCategoryChange(category)}
-                    >
-                      {category}
-                    </span>
-                  ))}
-                </div>
-                <a href={`/article/${article.id}`}>Read more →</a>
-              </article>
-            ))
-          ) : (
-            <p className={styles.noArticles}>{noResultsMessage}</p>
-          )}
+          {filteredArticles.map((article) => (
+            <article key={article.id} className={styles.card}>
+              <h2>{article.title}</h2>
+              <p>{article.excerpt}</p>
+              <div className={styles.metadata}>
+                <span>🔍 {article.searchVolume}</span>
+                <span>📅 {formatDate(article.timestamp)}</span>
+              </div>
+              <div className={styles.categories}>
+                {article.categories?.map(category => (
+                  <span 
+                    key={category} 
+                    className={styles.category}
+                    onClick={() => setSelectedCategory(category)}
+                  >
+                    {category}
+                  </span>
+                ))}
+              </div>
+              <Link href={`/article/${article.id}`}>
+                <a>Read more →</a>
+              </Link>
+            </article>
+          ))}
         </div>
       </main>
 
@@ -121,25 +87,4 @@ export default function Home({ articles: initialArticles, totalArticles }) {
       </footer>
     </div>
   );
-}
-
-export async function getStaticProps() {
-  try {
-    return {
-      props: {
-        initialArticles: STATIC_ARTICLES,
-        totalArticles: STATIC_ARTICLES.length
-      },
-      revalidate: 60
-    };
-  } catch (error) {
-    console.error('Error in getStaticProps:', error);
-    return {
-      props: {
-        initialArticles: [],
-        totalArticles: 0
-      },
-      revalidate: 60
-    };
-  }
 } 

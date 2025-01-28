@@ -3,54 +3,74 @@ import path from 'path';
 
 export const STATIC_ARTICLES = [
   {
-    id: "article-1",
-    title: "The Rise of AI in Healthcare: Transforming Patient Care",
-    excerpt: "Artificial Intelligence is revolutionizing healthcare delivery, from diagnosis to treatment planning. This article explores the latest developments and their impact on patient care.",
-    content: "<h2>Introduction</h2><p>The healthcare industry is witnessing a dramatic transformation through the integration of Artificial Intelligence (AI) technologies. From improving diagnosis accuracy to streamlining patient care, AI is revolutionizing how healthcare is delivered.</p><h2>Key Applications</h2><p>AI is being deployed across various healthcare domains:</p><ul><li>Diagnostic Imaging Analysis</li><li>Patient Data Processing</li><li>Treatment Planning</li><li>Drug Discovery</li></ul><h2>Impact on Patient Care</h2><p>The implementation of AI technologies has led to significant improvements in patient outcomes, reduced medical errors, and more efficient healthcare delivery systems.</p>",
-    timestamp: "2024-01-27T10:00:00Z",
-    searchVolume: "450,000+",
-    keywords: ["AI", "Healthcare", "Technology", "Medicine"],
-    categories: ["Technology", "Health"]
+    id: 1,
+    title: "The Future of Artificial Intelligence in Healthcare",
+    excerpt: "Exploring how AI is revolutionizing medical diagnosis, treatment planning, and patient care through advanced algorithms and machine learning.",
+    content: `Artificial Intelligence is transforming healthcare in unprecedented ways. From improving diagnostic accuracy to streamlining patient care, AI technologies are becoming an integral part of modern medicine. Machine learning algorithms can now analyze medical images with remarkable precision, often detecting conditions earlier than human practitioners.
+
+Recent developments have shown AI systems capable of predicting patient outcomes, optimizing treatment plans, and even discovering new drug combinations. These advances are particularly crucial in areas with limited access to healthcare professionals, where AI can provide initial screening and basic diagnostic services.
+
+However, the integration of AI in healthcare also raises important questions about data privacy, ethical considerations, and the role of human medical professionals. As we move forward, striking the right balance between technological advancement and human expertise will be crucial for optimal patient care.`,
+    timestamp: "2024-01-25",
+    categories: ["Technology", "Health"],
+    searchVolume: "High",
+    keywords: ["AI in healthcare", "medical technology", "machine learning", "digital health"]
   },
   {
-    id: "article-2",
-    title: "Climate Change: Global Initiatives and Economic Impact",
-    excerpt: "An in-depth look at how countries worldwide are addressing climate change and its effects on the global economy.",
-    content: "<h2>Global Climate Action</h2><p>Nations across the globe are implementing ambitious policies to combat climate change. These initiatives are reshaping industries and economic policies worldwide.</p><h2>Economic Implications</h2><p>The transition to sustainable practices is creating both challenges and opportunities:</p><ul><li>Renewable Energy Investment</li><li>Carbon Market Development</li><li>Green Job Creation</li></ul><h2>Future Outlook</h2><p>As countries accelerate their climate action plans, we're seeing a fundamental shift in how economies operate and grow sustainably.</p>",
-    timestamp: "2024-01-26T15:30:00Z",
-    searchVolume: "380,000+",
-    keywords: ["Climate Change", "Economy", "Environment", "Policy"],
-    categories: ["Environment", "Business"]
+    id: 2,
+    title: "Sustainable Business Practices in the Digital Age",
+    excerpt: "How companies are leveraging technology to reduce their environmental impact while maintaining profitability and growth.",
+    content: `The intersection of sustainability and digital transformation is creating new opportunities for businesses to thrive while reducing their environmental impact. Companies are increasingly adopting cloud computing, remote work solutions, and digital processes to minimize their carbon footprint.
+
+Leading organizations are implementing smart energy management systems, utilizing blockchain for supply chain transparency, and developing innovative recycling programs. These initiatives not only benefit the environment but also lead to significant cost savings and improved operational efficiency.
+
+The transition to sustainable practices is being accelerated by consumer demand, regulatory pressures, and technological advancements. Businesses that embrace this change are finding themselves better positioned for long-term success in an increasingly environmentally conscious market.`,
+    timestamp: "2024-01-26",
+    categories: ["Environment", "Business"],
+    searchVolume: "Medium",
+    keywords: ["sustainable business", "green technology", "corporate responsibility", "digital transformation"]
   },
   {
-    id: "article-3",
-    title: "The Future of Work: Remote vs. Hybrid Models",
-    excerpt: "Analyzing the evolving workplace landscape and how companies are adapting to new work models in the post-pandemic era.",
-    content: "<h2>Workplace Evolution</h2><p>The traditional office environment continues to evolve as organizations embrace flexible work arrangements. This shift is fundamentally changing how we think about work and productivity.</p><h2>Comparing Models</h2><p>Different approaches to modern work:</p><ul><li>Full Remote Operations</li><li>Hybrid Scheduling</li><li>Flexible Office Spaces</li></ul><h2>Technology Integration</h2><p>Digital tools and platforms are enabling seamless collaboration regardless of physical location.</p>",
-    timestamp: "2024-01-25T09:15:00Z",
-    searchVolume: "320,000+",
-    keywords: ["Remote Work", "Business", "Employment", "Technology"],
-    categories: ["Business", "Technology"]
+    id: 3,
+    title: "The Rise of Quantum Computing in Finance",
+    excerpt: "Understanding how quantum computing is set to revolutionize financial modeling, cryptography, and risk assessment in the banking sector.",
+    content: `Quantum computing is poised to revolutionize the financial sector by solving complex calculations that are currently impossible for classical computers. Major financial institutions are investing heavily in quantum research and development, recognizing its potential to transform everything from portfolio optimization to risk analysis.
+
+The technology's ability to process vast amounts of data simultaneously could lead to more accurate market predictions, better fraud detection, and enhanced cybersecurity measures. Early applications are already showing promising results in portfolio optimization and trading strategies.
+
+However, challenges remain in terms of quantum computer stability and error correction. Despite these obstacles, the finance industry continues to push forward with quantum initiatives, understanding that early adoption could provide significant competitive advantages.`,
+    timestamp: "2024-01-27",
+    categories: ["Business", "Technology"],
+    searchVolume: "High",
+    keywords: ["quantum computing", "fintech", "banking technology", "financial innovation"]
   },
   {
-    id: "article-4",
-    title: "Digital Privacy in the Age of Big Data",
-    excerpt: "Exploring the challenges and solutions in maintaining personal privacy as data collection becomes increasingly prevalent.",
-    content: "<h2>Privacy Concerns</h2><p>As our lives become more digitally integrated, the importance of data privacy has never been more critical. This article examines the current landscape of digital privacy and emerging protection measures.</p><h2>Key Challenges</h2><p>Major privacy issues include:</p><ul><li>Data Collection Practices</li><li>Information Security</li><li>Regulatory Compliance</li></ul><h2>Protection Strategies</h2><p>Learn about the tools and practices that can help protect your digital privacy.</p>",
-    timestamp: "2024-01-24T14:45:00Z",
-    searchVolume: "290,000+",
-    keywords: ["Privacy", "Technology", "Data Security", "Digital Rights"],
-    categories: ["Technology", "Education"]
+    id: 4,
+    title: "Revolutionizing Education Through Virtual Reality",
+    excerpt: "How VR technology is creating immersive learning experiences and transforming traditional educational methods.",
+    content: `Virtual Reality is revolutionizing education by creating immersive learning environments that were previously impossible. Students can now take virtual field trips to ancient civilizations, explore the human body from the inside, or conduct dangerous scientific experiments safely in a virtual lab.
+
+Educational institutions are increasingly adopting VR technology to enhance student engagement and understanding. The technology has shown particular promise in fields like medicine, engineering, and architecture, where hands-on experience is crucial but often difficult to provide in traditional settings.
+
+Research indicates that VR-based learning can improve retention rates and provide more engaging educational experiences. As the technology becomes more accessible and affordable, we're likely to see wider adoption across all levels of education.`,
+    timestamp: "2024-01-28",
+    categories: ["Technology", "Education"],
+    searchVolume: "Medium",
+    keywords: ["virtual reality", "education technology", "immersive learning", "edtech"]
   },
   {
-    id: "article-5",
-    title: "Sustainable Energy: Innovations Shaping Our Future",
-    excerpt: "Discover the latest breakthroughs in renewable energy technology and their impact on sustainable development.",
-    content: "<h2>Energy Innovation</h2><p>The renewable energy sector is experiencing unprecedented growth and technological advancement. These innovations are paving the way for a sustainable future.</p><h2>Breakthrough Technologies</h2><p>Key developments include:</p><ul><li>Advanced Solar Systems</li><li>Wind Energy Optimization</li><li>Energy Storage Solutions</li></ul><h2>Future Impact</h2><p>These technologies are set to transform how we generate and consume energy.</p>",
-    timestamp: "2024-01-23T11:20:00Z",
-    searchVolume: "275,000+",
-    keywords: ["Renewable Energy", "Sustainability", "Technology", "Innovation"],
-    categories: ["Technology", "Environment"]
+    id: 5,
+    title: "Green Energy Innovations Reshaping Our Future",
+    excerpt: "Exploring breakthrough technologies in renewable energy that are accelerating the transition to a sustainable future.",
+    content: `Recent innovations in green energy technology are accelerating the world's transition to sustainable power sources. From more efficient solar panels to advanced energy storage solutions, these developments are making renewable energy more accessible and affordable than ever before.
+
+Breakthrough technologies in wind power, including floating offshore wind farms and more efficient turbine designs, are opening up new possibilities for clean energy generation. Meanwhile, advances in battery technology are solving the intermittency challenges that have historically limited renewable energy adoption.
+
+These innovations are not just technical achievements – they're driving economic growth and creating new job opportunities in the green energy sector. As costs continue to decrease and efficiency improves, we're moving closer to a future powered entirely by renewable sources.`,
+    timestamp: "2024-01-29",
+    categories: ["Technology", "Environment"],
+    searchVolume: "High",
+    keywords: ["renewable energy", "green technology", "sustainability", "clean power"]
   }
 ];
 
