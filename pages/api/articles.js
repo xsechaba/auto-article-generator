@@ -1,6 +1,3 @@
-import fs from 'fs/promises';
-import path from 'path';
-
 export const STATIC_ARTICLES = [
   {
     id: 1,
